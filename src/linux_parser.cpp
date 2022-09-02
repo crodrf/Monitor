@@ -93,6 +93,8 @@ float LinuxParser::MemoryUtilization()
   string MemFree;
   string MemAvailable;
   string Buffers;
+  float free;
+  float total;
 
   std::ifstream stream(kProcDirectory + kMeminfoFilename);
   if (stream.is_open())
@@ -109,10 +111,11 @@ float LinuxParser::MemoryUtilization()
       break;
       }
       }
-      float free = stol(MemFree);
-      float total = stol(MemTotal);
-  return (total-free)/total;
+      free = stol(MemFree);
+      total = stol(MemTotal);
+  
 }
+return (total-free)/total;
 }
 
 // TODO: Read and return the system uptime
@@ -120,8 +123,6 @@ long LinuxParser::UpTime()
  { 
    string line;
    string word;
-   int contador=0;
-   long uptime=0;
 
     std::ifstream stream(kProcDirectory + kUptimeFilename);
     if (stream.is_open())
@@ -286,7 +287,6 @@ string LinuxParser::Command(int pid)
 {
    string line;
    string word;
-   int processes;
  
     std::ifstream stream(kProcDirectory +"/"+to_string(pid)+ kCmdlineFilename);
     if (stream.is_open())
@@ -303,7 +303,6 @@ string LinuxParser::Ram(int pid)
    string line;
    string word, word1;
    long number;
-   int processes;
  
     std::ifstream stream(kProcDirectory +"/"+to_string(pid)+ kStatusFilename);
     while (stream.is_open())
@@ -329,7 +328,6 @@ string LinuxParser::Uid(int pid)
 {
    string line;
    string word;
-   int processes;
  
     std::ifstream stream(kProcDirectory +"/"+to_string(pid)+ kStatusFilename);
     while (stream.is_open())
@@ -372,7 +370,6 @@ long LinuxParser::UpTime(int pid)
 {
    string line;
    string word;
-   int processes;
    int i =0;
  
     std::ifstream stream(kProcDirectory +"/"+to_string(pid)+ kStatFilename);
