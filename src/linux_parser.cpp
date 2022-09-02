@@ -69,19 +69,7 @@ vector<int> LinuxParser::Pids() {
   return pids;
 }
 
-/*vector<int> LinuxParser::Pids() {
-  vector<int> pids;
-  for (auto& p : std::filesystem::directory_iterator(kProcDirectory)) {
-    string filename = p.path().filename();
-    if (p.is_directory() &&
-        std::all_of(filename.begin(), filename.end(), isdigit)) {
-      int pid = stoi(filename);
-      pids.push_back(pid);
-    }
-  }
-  return pids;
-}
-*/
+
 
 // TODO: Read and return the system memory utilization
 float LinuxParser::MemoryUtilization()
