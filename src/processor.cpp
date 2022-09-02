@@ -16,7 +16,6 @@ void Processor::Store(long idle, long active, long total)
 float Processor::Utilization() 
 {
   long total1 = Processor::Total();
-  long active1 = Processor::Active();
   long idle1 = Processor::Idle();
 
   long total2 = LinuxParser::Jiffies();
