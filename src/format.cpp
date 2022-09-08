@@ -14,13 +14,14 @@ string Format::ElapsedTime(long seconds)
     int s = int(seconds % 3600)%60;
 
     string sec = std::to_string(s);
-    sec.insert(0, 2 - sec.length(), '0');
-
+    if(sec.length()<2)sec.insert(0, 2 - sec.length(), '0');
+    
     string mins = std::to_string(m);
-    mins.insert(0, 2 - mins.length(), '0');
+    if(mins.length()<2)mins.insert(0, 2 - mins.length(), '0');
 
     string hrs = std::to_string(h);
-    hrs.insert(0, 2 - hrs.length(), '0');
+    if(hrs.length()<2)hrs.insert(0, 2 - hrs.length(), '0');
         
     return hrs + ":" + mins + ":" +sec; 
+    //return std::to_string(h) + ":" + std::to_string(m) + ":" +std::to_string(s); 
 }
