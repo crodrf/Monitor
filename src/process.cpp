@@ -19,7 +19,7 @@ Process::Process(int pid)
  user_=LinuxParser::User(pid);
  uptime_= LinuxParser::UpTime(pid);
  long time = LinuxParser::ActiveJiffies(pid);
- try{utilization_ = float(time) / float(LinuxParser::UpTime() - uptime_);}
+ try{utilization_ = float(time) / float(uptime_);}
  catch(...){utilization_ =0.0;}
 }
 

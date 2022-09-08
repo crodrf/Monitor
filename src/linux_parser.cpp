@@ -293,9 +293,10 @@ string LinuxParser::Ram(int pid)
    long number;
  
     std::ifstream stream(kProcDirectory +"/"+to_string(pid)+ kStatusFilename);
-    while (stream.is_open())
+    if (stream.is_open())
     {
-      std::getline(stream,line);
+      while(std::getline(stream,line))
+      {
       std::stringstream ss(line);
       ss>>word;
       if (word == "VmSize:")
@@ -306,9 +307,11 @@ string LinuxParser::Ram(int pid)
          //ss>>word;
          break;
       }
+      }
     }
    return word1;
 }
+
 
 // TODO: Read and return the user ID associated with a process
 // REMOVE: [[maybe_unused]] once you define the function
@@ -371,5 +374,5 @@ long LinuxParser::UpTime(int pid)
          break;
       }
     }
-   return stol(word);
+   return LinuxParser::UpTime()-stol(word);
 }

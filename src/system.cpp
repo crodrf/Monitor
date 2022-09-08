@@ -27,12 +27,15 @@ vector<Process>& System::Processes() {
   processes_.clear();
   for (unsigned int i = 0; i < pids.size(); i++) 
   {
+      if (!LinuxParser::Ram(pids[i]).empty())
+      {
       Process process(pids[i]);
       processes_.push_back(process);
+      }
   } 
+  sort(processes_.rbegin(), processes_.rend());
   return processes_;
 }
-
 
 // TODO: Return the system's kernel identifier (string)
 std::string System::Kernel() { return LinuxParser::Kernel(); }
